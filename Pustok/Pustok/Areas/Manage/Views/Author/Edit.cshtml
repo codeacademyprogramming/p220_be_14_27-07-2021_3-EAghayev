@@ -1,0 +1,56 @@
+﻿@model Author
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container-fluid">
+    <h1>Edit</h1>
+
+    <form method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label asp-for="FullName">Name</label>
+            <input type="text" asp-for="FullName" class="form-control">
+            <span class="text-danger" asp-validation-for="FullName"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Desc">Desc</label>
+            <textarea asp-for="Desc" class="form-control"></textarea>
+            <span class="text-danger" asp-validation-for="Desc"></span>
+        </div>
+
+
+        <div class="form-group">
+
+
+            @if (Model.Image != null)
+            {
+            <div class="img-box d-inline-block" style="position:relative">
+                <i class="fas fa-times img-remove" style="position: absolute; top: -8px; color: red;right: -8px;"></i>
+                <img src="~/uploads/authors/@Model.Image" alt="Alternate Text" />
+                <input type="hidden" name="Image" value="@Model.Image" />
+            </div>
+               
+            }
+            <input asp-for="ImageFile" value="" />
+            <span class="text-danger" asp-validation-for="ImageFile"></span>
+
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+@section Scripts{
+
+<script>
+    $(document).ready(function () {
+
+        $(document).on("click", ".img-remove", function () {
+            $(this).parent().empty()
+        })
+    });
+</script>
+}
+
+
